@@ -1,0 +1,14 @@
+ir_cm
+ - OUTPUT - Int32 of the distance to the 'nearest object' in centimeters. WARNING: these sensors are hot garbage and might need some filtering...
+
+ir_pos
+ - INPUT - Int32 from 0->180, mapped to servo rotation
+
+left_wheel
+ - INPUT - Int32 from -100->100, negative for reverse, positive forward
+
+right_wheel
+ - INPUT - Int32 from -100->100, negative for reverse, positive forward
+
+webcam/image_raw
+ - OUTPUT - Image type, very uncompressed and massive. Using raw 640x480 gets ~8fps, 30Mbit bandwidth usage. Using the compressed image transport (see examples) gives 30fps ~1.2Mbit bandwidth. 
