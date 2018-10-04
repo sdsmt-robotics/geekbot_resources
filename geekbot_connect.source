@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+printf "Remember: source this file ('source geekbot_connect.source')\n\n"
+source /opt/ros/kinetic/setup.bash
+
+ETH_GATEWAY=$(ifconfig | grep "inet addr:10" | awk '/inet addr/{print substr($2,6)}')
+GEEKBOT_IP=$(nmap -n -sn $ETH_GATEWAY/24 -oG - | awk '/Up/ {if($2 !="10.42.0.1") {print $2};}')
+
+echo "This computer's IP: $ETH_GATEWAY"
+echo "Geekbot found at: $GEEKBOT_IP"
+echo "exporting ROS_IP=$ETH_GATEWAY"
+echo "exporting ROS_MASTER_URI=http://$GEEKBOT_IP:11311"
+
+export ROS_IP=$ETH_GATEWAY
+export ROS_MASTER_URI=http://$GEEKBOT_IP:11311
+
+printf "\nAvailable topics: \n"
+printf "===================\n"
+rostopic list
+

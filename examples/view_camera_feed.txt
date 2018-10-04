@@ -1,0 +1,5 @@
+Here's a handy call to view the camera feed coming off the GeekBot, assuming the bot is connected physically and all network parameters have been configured: 
+
+> rosrun image_view image_view image:=/geekbot/webcam/image_raw _image_transport:=compressed
+
+What this does is run an image_view node from the image_view package and map two parameters from their default values. The image stream from our GeekBots is the topic /geekbot/webcam/image_raw, and we want to use a compressed JPEG image stream. Pretty straightforward and useful for debugging camera things!

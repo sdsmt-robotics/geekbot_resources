@@ -1,0 +1,10 @@
+This is a quickie that shows, graphically, which nodes are communicating over which topics. Very handy for debugging if communication issues crop up. You will have to install a few python packages. Just run these two commands:
+
+> pip install pydot
+> pip install graphviz
+
+Then, we'll use ROS' rqt_graph tool to visualize the current ROS landscape:
+
+> rosrun rqt_graph rqt_graph
+
+For a freshly-booted GeekBot this should show two nodes in the /geekbot namespace: geekbot_node which handles communication to and from the microcontroller, and webcam, which connects to and pulls data from the USB webcam. Don't forget that this tool exists!

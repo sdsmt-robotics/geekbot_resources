@@ -1,0 +1,35 @@
+updating_odroid
+
+Updating the codebase running on the GeekBot is not quite as tricky as it might seem, but it is somewhat involved. ROS uses 'workspaces' to organize packages for building and installation. One of these is set up in the root user's directory, containing everything needed to run the GeekBot. One of the packages in this workspace is called geekbot_pkg. This package contains the python communication module, ROS wrapper, automatic bringup service, and the startup script to officially launch ROS on the GeekBot. This package is also tied directly to a git repo that can be updated remotely! All one needs to update the GeekBot is a connection to the internet for the onboard Odroid and some patience.
+
+With the GeekBot connected to and recognized by your OS/VM, log into the root user of the GeekBot via SSH:
+
+> ssh root@10.42.0.19
+  (or whatever IP address your GeekBot grabs. Use 'nmap -sP 10.42.0.1/24' to locate)
+
+When prompted for a password, type 'geekbot'. Now we should be logged in to the root account on the odroid. Listing everything in the current directory ('ls') should show one directory: geekbot_ws. We'll move into the workspace's source directory:
+
+> cd geekbot_ws/src
+
+And delete the old geekbot_pkg:
+
+> rm -rf geekbot_pkg
+
+Then clone the new one in:
+
+> git clone https://github.com/sdsmt-robotics/geekbot_pkg.git
+
+Nice! Now let's update the system services by moving into:
+
+> cd geekbot_pkg/bringup
+
+and running the script provided to do our dirty work:
+
+> ./update_service.sh
+
+Now the system services should be updated. Let's rebuild the workspace:
+
+> cd /geekbot_ws
+> catkin_make
+
+Lots of gibberish should have shown up on the screen. Now, reboot the robot and you're all set!
