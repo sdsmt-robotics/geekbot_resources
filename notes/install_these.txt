@@ -1,0 +1,11 @@
+In order to get the baseline functionality of the bot spun up on your laptop 
+four extra packages will be needed: nmap, ros-kinetic-image-view, ros-kinetic-image-common, 
+and ros-kinetic-image-transport-plugins. To install: 
+
+sudo apt install nmap ros-kinetic-image-view ros-kinetic-image-common ros-kinetic-image-transport-plugins
+
+Nmap is used in the connection script, and the rest for camera stream things.
+
+For OpenCV functionality the ROS CV bridge will be necessary:
+
+sudo apt install ros-kinetic-cv-bridge
