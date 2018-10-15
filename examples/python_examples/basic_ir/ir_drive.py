@@ -15,7 +15,7 @@ def callback(data):
         left_pub.publish(msg)
         right_pub.publish(msg)
     else: 
-        print("Too close! Stop!")
+        print("Too far! Stop!")
         msg = Int32()
         msg.data = 0
         left_pub.publish(msg)
