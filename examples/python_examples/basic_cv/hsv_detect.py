@@ -25,7 +25,6 @@ class object_tracker:
     # Connect ROS to OpenCV, set the minimum tracked object size
     self.bridge = CvBridge()
     self.image_sub = rospy.Subscriber("/geekbot/webcam/image_raw/compressed", CompressedImage, self.callback)
-    #self.image_sub = rospy.Subscriber("/geekbot/webcam/image_raw/compressed", CompressedImage, self.callback)
     self.min_px_area = (100*100)
 
   def callback(self,data):
@@ -136,11 +135,12 @@ class object_tracker:
     return contours[largest_index]
 
   # Erode small objects, inflate them again, return the denoised mask
+  # These are ballparked values, change as necessary
   def denoise_mask(self, input):
     temp = cv2.erode(input, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (8, 8)), iterations=1)
     temp = cv2.dilate(input, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5)), iterations=1)
-    #temp = cv2.erode(input, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5)), iterations=1)
     #temp = cv2.dilate(input, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5)), iterations=1)
+    #temp = cv2.erode(input, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5)), iterations=1)
     return temp
 
 def main(args):
